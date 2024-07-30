@@ -8,11 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace 記帳程式
+namespace 記帳程式.Forms
 {
-    public partial class Form1 : Form
+    [DisplayName("設定")]
+    public partial class SettingForm : Form
     {
-        public Form1()
+        public SettingForm()
         {
             InitializeComponent();
         }

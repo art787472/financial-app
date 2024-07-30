@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using 記帳程式.Components;
+using 記帳程式.Forms;
 
 namespace 記帳程式
 {
@@ -16,7 +18,7 @@ namespace 記帳程式
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(SingletonForm.GetForm(Models.FormCategory.AddForm));
         }
     }
 }
