@@ -25,8 +25,9 @@ namespace 記帳程式.Components
         private void MenuBar_Load(object sender, EventArgs e)
         {
             var theList = Assembly.GetExecutingAssembly().GetTypes().ToList().Where(t => t.Namespace == "記帳程式.Forms").ToList();
-            //var nameList = theList.Select(t => t.GetCustomAttribute<DisplayNameAttribute>().DisplayName).ToList();
-            var nameList = theList.Select(t => t.FullName).ToList();
+            theList = theList.Where(t => t.Name.EndsWith("Form")).ToList();
+            var nameList = theList.Select(t => t.GetCustomAttribute<DisplayNameAttribute>().DisplayName).ToList();
+            
             var classNameList = theList.Select(t => t.Name).ToList();
             this.Width = 500;
             this.Height = 80;

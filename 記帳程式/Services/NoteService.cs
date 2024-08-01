@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using 記帳程式.Models;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace 記帳程式.Services
 {
@@ -93,29 +94,73 @@ namespace 記帳程式.Services
 
         public static void AddComboboxColoumn(DataGridView dataGridView)
         {
-            DataGridViewComboBoxColumn reasonComboBoxColumn = new DataGridViewComboBoxColumn();
+            DataGridViewComboBoxColumn categoryComboBox = new DataGridViewComboBoxColumn();
 
 
             var categories = AppData.typeList.Select(x => x.Key).ToList();
-            reasonComboBoxColumn.DataSource = categories;
+            categoryComboBox.DataSource = categories;
 
-            reasonComboBoxColumn.ValueType = typeof(string);
+            categoryComboBox.ValueType = typeof(string);
 
-            
+            categoryComboBox.HeaderText = "類別";
 
-            dataGridView.Columns[2].Visible = false;
+            dataGridView.Columns.RemoveAt(2);
 
-            dataGridView.Columns.Insert(2, reasonComboBoxColumn);
+            dataGridView.Columns.Insert(2, categoryComboBox);
+
+            DataGridViewComboBoxColumn reasonComboBox = new DataGridViewComboBoxColumn();
+            reasonComboBox.ValueType = typeof(string);
+            reasonComboBox.HeaderText = "消費目的";
+            dataGridView.Columns.RemoveAt(3);
+            dataGridView.Columns.Insert(3, reasonComboBox);
+
+            DataGridViewComboBoxColumn accountComboBox = new DataGridViewComboBoxColumn();
+
+            var accounts = new List<string> { "銀行", "Visa", "行動支付" };
+            accountComboBox.DataSource = accounts;
+            accountComboBox.ValueType = typeof(string);
+            accountComboBox.HeaderText = "帳戶";
+
+            dataGridView.Columns.RemoveAt(4);
+
+            dataGridView.Columns.Insert(4, accountComboBox);
 
             List<Item> list = (List<Item>)dataGridView.DataSource;
 
             for (int row = 0; row < dataGridView.Rows.Count; row++)
             {
+                var cell = ((DataGridViewComboBoxCell)dataGridView.Rows[row].Cells[2]);
+                var dataSource = cell.DataSource;
+                //cell.Value = "食";
+                var data = list[row];
+                cell.Value = list[row].category;
 
-                ((DataGridViewComboBoxCell)dataGridView.Rows[row].Cells[2]).Value = list[row].category;
+                var reasonCell = ((DataGridViewComboBoxCell)dataGridView.Rows[row].Cells[3]);
+                var reasons = AppData.typeDictionary[data.category].Select(x => x.Key).ToList();
+                reasonCell.DataSource = reasons;
+                reasonCell.Value = data.reason;
+
+                var accountCell= ((DataGridViewComboBoxCell)dataGridView.Rows[row].Cells[4]);
+                accountCell.Value = data.account;
             }
 
 
+            
+
+        }
+        public static void AddDelete(DataGridView dataGridView)
+        {
+            DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
+            imageColumn.Name = "DeleteColumn";
+            imageColumn.HeaderText = "Delete";
+            imageColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
+
+            dataGridView.Columns.Add(imageColumn);
+            for (int row = 0; row < dataGridView.Rows.Count; row++)
+            {
+                var cell = ((DataGridViewImageCell)dataGridView.Rows[row].Cells[dataGridView.ColumnCount - 1]);
+                cell.Value = Image.FromFile(@"D:\c_sharp\記帳程式\記帳程式\assets\trash-can.png");
+            }
 
         }
     }
