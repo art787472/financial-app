@@ -13,26 +13,7 @@ namespace 記帳程式.Services
 {
     internal class NoteService
     {
-        public static List<Item> GetData(DateTime startTime, DateTime endTime)
-        {
-            List<Item> list = new List<Item>();
-            
-            var diff = endTime - startTime;
-            var days = diff.Days;
 
-            for (int i = 0; i <= days; i++)
-            {
-                DateTime dateTime = startTime.AddDays(i);
-                string directoryName = $@"D:\c_sharp\記帳程式\記帳程式\bin\Debug\{dateTime.ToString("yyyy-MM-dd")}";
-                if (Directory.Exists(directoryName))
-                {
-                    string path = $@"{directoryName}\data.csv";
-                    var data = CSVLibrary.CSVHelper.Read<Item>(path);
-                    list = list.Concat(data).ToList();
-                }
-            }
-            return list;
-        }
 
         public static void AddImage(DataGridView dataGridView)
         {
@@ -66,12 +47,16 @@ namespace 記帳程式.Services
                 }
                 else
                 {
+                    var smallPic1 = Image.FromFile(list[row].smallPicPath1);
+                    image = smallPic1;
 
-                    image = Image.FromFile(list[row].smallPicPath1);
+                    
+                    
                     
                 }
 
                 ((DataGridViewImageCell)dataGridView.Rows[row].Cells[9]).Value = image;
+                
             }
 
             for (int row = 0; row < dataGridView.Rows.Count; row++)
@@ -84,7 +69,11 @@ namespace 記帳程式.Services
                 else
                 {
 
-                    image = Image.FromFile(list[row].smallPicPath2);
+                    var smallPic2 = Image.FromFile(list[row].smallPicPath2);
+                    
+                    image = smallPic2;
+
+                    
                 }
                 
 

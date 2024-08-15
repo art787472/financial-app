@@ -49,8 +49,8 @@
             this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
-            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
-            this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
+            
+            
             // 
             // button1
             // 
@@ -70,7 +70,7 @@
             this.label1.Size = new System.Drawing.Size(56, 12);
             this.label1.TabIndex = 3;
             this.label1.Text = "日期起點:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            
             // 
             // dateTimePicker1
             // 

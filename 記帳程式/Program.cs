@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using 記帳程式.Components;
 using 記帳程式.Forms;
+using 記帳程式.MVP;
 
 namespace 記帳程式
 {
@@ -18,6 +19,9 @@ namespace 記帳程式
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            DIContainer.Register();
+
             Application.Run(SingletonForm.GetForm(Models.FormCategory.AddForm));
         }
     }

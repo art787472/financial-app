@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using System.Windows.Forms;
+using 記帳程式.Services;
 //using System.Timers;
 //using Timer = System.Timers.Timer;
 
@@ -108,6 +109,13 @@ namespace 記帳程式.Utility
                 tuple.Item2.Invoke();
 
             }));
+        }
+
+        public static void AddCustomColoums(this DataGridView dataGridView)
+        {
+            NoteService.AddImage(dataGridView);
+            NoteService.AddComboboxColoumn(dataGridView);
+            NoteService.AddDelete(dataGridView);
         }
     }
 }

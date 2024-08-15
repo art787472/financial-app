@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using 記帳程式.Components;
 using 記帳程式.Models;
+using 記帳程式.MVP;
 
 namespace 記帳程式
 {
@@ -26,7 +27,23 @@ namespace 記帳程式
             }
             if (!formDict.ContainsKey(formCategory)) 
             {
-                formDict[formCategory] = (Form)Activator.CreateInstance(t);
+                Form form = null;
+                switch(formCategory)
+                {
+                    case FormCategory.AddForm:
+                        form = (Form)DIContainer.GetInstance<IAddFormView>();
+                        break;
+                    case FormCategory.AccountForm:
+                        form = (Form)Activator.CreateInstance(t);
+                        break;
+                    case FormCategory.GraphicForm:
+                        form = (Form)Activator.CreateInstance(t);
+                        break;
+                    case FormCategory.NoteForm:
+                        form = (Form)DIContainer.GetInstance<INoteFormView>();
+                        break;
+                }
+                formDict[formCategory] = form;
             }
             
             currentForm = formDict[formCategory];

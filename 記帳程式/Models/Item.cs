@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace 記帳程式.Models
 {
-    internal class Item
+    public class Item
     {
         [DisplayName("日期")]
         public string dateTime { get; set; }
