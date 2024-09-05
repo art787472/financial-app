@@ -14,7 +14,7 @@ namespace 記帳程式.MVP
 
         void AddRecord(Item data);
 
-        void DeleteRecord(List<Item> list);
+        void DeleteRecord(Item data);
 
         void EditRecord(List<Item> list);
 

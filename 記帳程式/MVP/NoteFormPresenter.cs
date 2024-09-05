@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,12 +21,12 @@ namespace 記帳程式.MVP
             
             Item data = list[idx];
             list.RemoveAt(idx);
+            
+            view.DeleteRecordFinish(true, list);
             string directoryName = DateTime.Parse(data.dateTime).ToString("yyyy-MM-dd");
             var newList = list.Where(x => DateTime.Parse(x.dateTime).ToString("yyyy-MM-dd") == directoryName).ToList();
-            data = null;
-            GC.Collect();
-            view.DeleteRecordFinish(true, list);
-            repository.DeleteRecord(newList);
+
+            repository.DeleteRecord(data);
 
         }
 
@@ -66,7 +67,7 @@ namespace 記帳程式.MVP
         public void SetView(INoteFormView view)
         {
             this.view = view;
-            this.repository = new Repository();
+            this.repository = DIContainer.GetInstance<IRepository>();
         }
     }
 }

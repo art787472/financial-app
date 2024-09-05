@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
@@ -20,17 +22,18 @@ namespace 記帳程式.MVP
 
         public void AddRecord(ViewItem item)
         {
+            string filePath = ConfigurationManager.AppSettings["filePath"];
             string directoryName = item.dateTime.ToString("yyyy-MM-dd");
-            string directoryFullName = $@"D:\c_sharp\記帳程式\記帳程式\bin\Debug\{directoryName}\data.csv";
 
             string fileName1 = Guid.NewGuid().ToString();
             string fileName2 = Guid.NewGuid().ToString();
 
-            string imagePath1 = $@"D:\c_sharp\記帳程式\記帳程式\bin\Debug\{directoryName}\{fileName1}.jpeg";
-            string imagePath2 = $@"D:\c_sharp\記帳程式\記帳程式\bin\Debug\{directoryName}\{fileName2}.jpeg";
+            string imagePath1 = Path.Combine(filePath, $@"{directoryName}\{fileName1}.jpeg");
+            string imagePath2 = Path.Combine(filePath, $@"{directoryName}\{fileName2}.jpeg");
 
-            string smallImgPath1 = $@"D:\c_sharp\記帳程式\記帳程式\bin\Debug\{directoryName}\{fileName1}-small.jpeg";
-            string smallImgPath2 = $@"D:\c_sharp\記帳程式\記帳程式\bin\Debug\{directoryName}\{fileName2}-small.jpeg";
+            string smallImgPath1 = Path.Combine(filePath, $@"{directoryName}\{fileName1}-small.jpeg");
+            string smallImgPath2 = Path.Combine(filePath, $@"{directoryName}\{fileName2}-small.jpeg");
+            
 
             Item newItem = new Item();
             newItem.dateTime = item.dateTime.ToString("yyyy-MM-dd HH:mm");
@@ -69,7 +72,7 @@ namespace 記帳程式.MVP
         public void SetView(IAddFormView view)
         {
             this.view = view;
-            this.repository = new Repository();
+            this.repository = DIContainer.GetInstance<IRepository>();
         }
     }
 }

@@ -18,6 +18,11 @@ namespace 記帳程式.MVP
             collection.AddSingleton<IAddFormView, AddForm>();
             collection.AddScoped<INoteFormPresenter, NoteFormPresenter>();
             collection.AddSingleton<INoteFormView, NoteForm>();
+            collection.AddScoped<ISearchFormPresenter, SearchFormPresenter>();
+            collection.AddSingleton<ISearchFormView, AccountForm>();
+            collection.AddScoped<IRepository, Repository>();
+            collection.AddSingleton<IGraphicFormView, GraphicForm>();
+            collection.AddScoped<IGraphicFormPresenter,GraphicFormPresenter>();
             provider = collection.BuildServiceProvider();
         }
 

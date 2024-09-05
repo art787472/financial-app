@@ -54,6 +54,30 @@ namespace 記帳程式.Forms
             {
                 presenter.DeleteRecord(rowIdx);
 
+                // Edit data
+                //List<Item> list = (List<Item>)dataGridView1.DataSource;
+                //Item data = list[rowIdx];
+
+                //list.RemoveAt(rowIdx);
+
+
+                // Reload UI
+                //DataGridViewReload(list);
+
+                // Edit CSV
+                //string directoryName = DateTime.Parse(data.dateTime).ToString("yyyy-MM-dd");
+
+                //List<Item> newlist = list.Where(x => DateTime.Parse(x.dateTime).ToString("yyyy-MM-dd") == directoryName).ToList();
+
+                //string path = $@"D:\c_sharp\記帳程式\記帳程式\bin\Debug\{directoryName}\data.csv";
+                //File.Delete(path);
+                //File.Delete(data.picPath1);
+                //File.Delete(data.picPath2);
+                //File.Delete(data.smallPicPath1);
+                //File.Delete(data.smallPicPath2);
+
+                //CSVLibrary.CSVHelper.Write(newlist, path);
+
             }
 
         }
@@ -112,6 +136,8 @@ namespace 記帳程式.Forms
         {
             dataGridView1.Columns.Clear();
             dataGridView1.DataSource = null;
+            Application.DoEvents();
+
             GC.Collect();
 
             dataGridView1.DataSource = items;
@@ -146,7 +172,7 @@ namespace 記帳程式.Forms
                 MessageBox.Show("編輯失敗");
                 return;
             }
-
+            DataGridViewReload(items);
             MessageBox.Show("編輯成功");
         }
     }
